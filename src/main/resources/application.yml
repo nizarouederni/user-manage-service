@@ -1,10 +1,10 @@
 server:
-  port: '9090'
+  port: '9001'
 
 spring:
   datasource:
     username: root
-    url: jdbc:mysql://localhost:3306/service_user_db
+    url: jdbc:mysql://localhost:3307/service_user_db
     password: admin
   jpa:
     properties:

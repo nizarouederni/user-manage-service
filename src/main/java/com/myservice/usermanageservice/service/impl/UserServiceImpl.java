@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
-    ModelMapper modelMapper= new ModelMapper();
+    private ModelMapper modelMapper;
 
     @Override
     public UserDto saveUser(UserDto userDto) {
