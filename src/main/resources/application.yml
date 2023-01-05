@@ -6,10 +6,10 @@ spring:
     username: root
     url: jdbc:mysql://localhost:3307/service_user_db
     password: admin
-    driver-class-name: com.mysql.jdbc.Driver
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
