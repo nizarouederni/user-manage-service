@@ -4,8 +4,9 @@ server:
 spring:
   datasource:
     username: root
-    url: jdbc:mysql://localhost:3306/service_user_db
+    url: jdbc:mysql://localhost:3307/service_user_db
     password: admin
+    driver-class-name: com.mysql.jdbc.Driver
   jpa:
     properties:
       hibernate:
