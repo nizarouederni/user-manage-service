@@ -7,17 +7,6 @@ def HTTP_PORT = getHTTPPort(env.BRANCH_NAME)
 
 node {
     try {
-    tools {
-            jdk 'Java17'
-        }
-
-        stages {
-                stage('Which Java?') {
-                    steps {
-                        sh 'java --version'
-                    }
-                }
-        }
         stage('Initialize') {
             def dockerHome = tool 'DockerTest'
             def mavenHome = tool 'MavenTest'
