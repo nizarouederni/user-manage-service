@@ -21,7 +21,7 @@ public class UserController {
 
     // Build Save User Rest API
     @PostMapping
-    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         UserDto saveUserDto = userService.saveUser(userDto);
         return new ResponseEntity<>(saveUserDto, HttpStatus.OK);
