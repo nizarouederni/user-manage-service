@@ -1,15 +1,37 @@
 server:
   port: '9001'
 
+#spring:
+#  datasource:
+#    username: root
+#    url: jdbc:mysql://localhost:3307/service_user_db
+#    password: admin
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+#    hibernate:
+#      ddl-auto: update
+
 spring:
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     url: jdbc:mysql://localhost:3307/service_user_db
     password: admin
-    driver-class-name: com.mysql.jdbc.Driver
+
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  logging:
+    level:
+      org:
+        hibernate:
+          SQL: DEBUG
+          type:
+            descriptor:
+              sql:
+                BasicBinder: TRACE
