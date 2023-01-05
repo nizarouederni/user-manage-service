@@ -19,7 +19,9 @@ node {
 
         stage('Build with test') {
             sh "mvn -version"
-            sh "mvn clean install"
+            sh "mvn clean"
+            sh "mvn deploy"
+            sh "mvn install"
         }
 
         stage('Sonarqube Analysis') {
