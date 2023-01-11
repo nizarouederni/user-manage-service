@@ -1,30 +1,26 @@
-pipeline {
-    agent any
-    tools {
-        maven 'MavenLaTest'
-    }
-    stages {
+def CONTAINER_NAME = "userservice"
+
+
+node{
+    try{
+        stage('Initialize') {
+            def dockerHome = tool 'DockerLaTest'
+            def mavenHome = tool 'MavenLaTest'
+            env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+        }
+
+        stage('Checkout') {
+            checkout scm
+        }
 
         stage('Build with test') {
-            steps {
-                echo 'Building..'
-                sh "mvn clean install"
-            }
+            sh "mvn -version"
+            sh "mvn clean install"
         }
-        stage('docker images') {
-            steps {
-                sh 'docker images'
-            }
+        stage('Build with test') {
+            sh "docker images"
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+    } finally{
+
     }
 }
