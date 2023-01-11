@@ -3,9 +3,11 @@ pipeline {
 
     stages {
         stage('Initialize') {
-                    def dockerHome = tool 'DockerLaTest'
-                    def mavenHome = tool 'MavenLaTest'
-                    env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+            steps{
+                def dockerHome = tool 'DockerLaTest'
+                def mavenHome = tool 'MavenLaTest'
+                env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+            }
                 }
         stage('Checkout') {
                     checkout scm
