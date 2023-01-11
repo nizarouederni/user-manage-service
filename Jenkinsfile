@@ -1,23 +1,20 @@
 pipeline {
     agent any
-
+    tools {
+        maven 'MavenLaTest'
+        docker 'DockerLaTest'
+    }
     stages {
-        stage('Initialize') {
-            steps{
-                def dockerHome = tool 'DockerLaTest'
-                def mavenHome = tool 'MavenLaTest'
-                env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-            }
-                }
-        stage('Checkout') {
-                    checkout scm
-                }
+
         stage('Build with test') {
             steps {
                 echo 'Building..'
-            }
-            steps{
                 sh "mvn clean install"
+            }
+        }
+        stage('docker images') {
+            steps {
+                sh 'docker images'
             }
         }
         stage('Test') {
