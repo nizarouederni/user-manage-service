@@ -6,13 +6,11 @@ spring:
     username: root
     url: jdbc:mysql://localhost:3307/service_user_db
     password: admin
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-db:
-  url: jdbc:mysql://localhost:3307/indigo?useSSL=false&useTimezone=true&serverTimezone=UTC
