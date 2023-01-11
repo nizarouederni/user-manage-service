@@ -8,8 +8,8 @@ def HTTP_PORT = getHTTPPort(env.BRANCH_NAME)
 node {
     try {
         stage('Initialize') {
-            def dockerHome = tool 'DockerTest'
-            def mavenHome = tool 'MavenTest'
+            def dockerHome = tool 'DockerLaTest'
+            def mavenHome = tool 'MavenLaTest'
             env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
         }
 
