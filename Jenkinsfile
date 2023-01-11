@@ -2,7 +2,6 @@ pipeline {
     agent any
     tools {
         maven 'MavenLaTest'
-        docker 'DockerLaTest'
     }
     stages {
 
