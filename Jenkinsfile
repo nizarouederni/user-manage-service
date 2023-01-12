@@ -18,6 +18,10 @@ node{
             sh "mvn clean install"
         }
 
+        stage("Clean Docker") {
+            cleanDocker(CONTAINER_NAME)
+        }
+
         stage("Image Prune") {
             imagePrune(CONTAINER_NAME)
         }
@@ -46,6 +50,16 @@ node{
     }
 }
 
+def cleanDocker(containerName) {
+    try {
+        sh "docker image rm $(docker image ls --format '{{.Repository}}:{{.Tag}}' | grep '^$containerName:')"
+        sh "docker rm $containerName')"
+    } catch (ignored) {
+
+    }
+
+}
+
 def imagePrune(containerName) {
     try {
         sh "docker image prune -f"
@@ -68,19 +82,20 @@ def pushToImage(containerName, tag, dockerUser, dockerPassword) {
 }
 
 def runApp(containerName, tag, dockerHubUser, httpPort) {
-    sh "docker pull $dockerHubUser/$containerName"
-    sh "docker run --rm -d -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
+    sh "docker pull $dockerHubUser/$containerName:$tag"
+    sh "docker run -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
     echo "Application started on port: ${httpPort} (http)"
 }
 
 String getHTTPPort(String branchName) {
-    if (branchName == 'master') {
-        return '9001'
-
-    } else if (branchName.startsWith("release-") || branchName.startsWith("hotfix-") || branchName == 'ready') {
-        return '9002'
-    }
-    return '9003'
+//     if (branchName == 'master') {
+//         return '9001'
+//
+//     } else if (branchName.startsWith("release-") || branchName.startsWith("hotfix-") || branchName == 'ready') {
+//         return '9002'
+//     }
+//     return '9003'
+    return '9001'
 }
 
 
