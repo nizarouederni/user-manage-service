@@ -18,10 +18,6 @@ node{
             sh "mvn clean install"
         }
 
-        stage("Clean Docker") {
-            cleanDocker(CONTAINER_NAME)
-        }
-
         stage("Image Prune") {
             imagePrune(CONTAINER_NAME)
         }
@@ -48,16 +44,6 @@ node{
     } finally{
         deleteDir()
     }
-}
-
-def cleanDocker(containerName) {
-    try {
-        sh "docker image rm $(docker image ls --format '{{.Repository}}:{{.Tag}}' | grep '^$containerName:')"
-        sh "docker rm $containerName')"
-    } catch (ignored) {
-
-    }
-
 }
 
 def imagePrune(containerName) {

@@ -1,13 +1,9 @@
 FROM openjdk:17
 
-ARG JAR_FILE=target/user-manage-service-*.jar
-
-ARG FILE_NAME=user-manage-service.jar
-
 WORKDIR /opt/app
 
-COPY ${JAR_FILE} ${FILE_NAME}
+COPY target/user-manage-service-*.jar /app.jar
 
-ENTRYPOINT ["java","-jar","/${FILE_NAME}"]
+ENTRYPOINT ["java","-jar","/app.jar"]
 
 EXPOSE 9001
